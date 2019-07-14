@@ -98,26 +98,32 @@ video_threading.start()                                     #Thread starts
 
 
 def replace_num(initial,new_num):   #Call this function to replace data in '.txt' file
-    newline=""
-    str_num=str(new_num)
-    with open("ip.txt","r") as f:
-        for line in f.readlines():
-            if(line.find(initial) == 0):
-                line = initial+"%s" %(str_num)
-            newline += line
-    with open("ip.txt","w") as f:
-        f.writelines(newline)    #Call this function to replace data in '.txt' file
+    try:
+        newline=""
+        str_num=str(new_num)
+        with open("ip.txt","r") as f:
+            for line in f.readlines():
+                if(line.find(initial) == 0):
+                    line = initial+"%s" %(str_num)
+                newline += line
+        with open("ip.txt","w") as f:
+            f.writelines(newline)    #Call this function to replace data in '.txt' file
+    except:
+        print("Error Writing IP Address.  Check permissions and path.")
 
 
 def num_import(initial):            #Call this function to import data from '.txt' file
-    with open("ip.txt") as f:
-        for line in f.readlines():
-            if(line.find(initial) == 0):
-                r=line
-    begin=len(list(initial))
-    snum=r[begin:]
-    n=snum
-    return n    
+    try:
+        with open("ip.txt") as f:
+            for line in f.readlines():
+                if(line.find(initial) == 0):
+                    r=line
+        begin=len(list(initial))
+        snum=r[begin:]
+        n=snum
+        return n    
+    except:
+        print("Error reading IP Adress.  Check permissions and path.")
 
 
 def call_SportMode(event):
